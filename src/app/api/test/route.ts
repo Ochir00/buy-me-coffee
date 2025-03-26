@@ -1,0 +1,23 @@
+import { Usergetdata } from "@/app/back-end/userdata";
+import { NextResponse } from "next/server";
+  import { cookies } from 'next/headers'
+export async function GET() {
+    const data = Usergetdata()
+  return new Response("wiwiwi");
+}
+// export async function POST(req: Request) {
+//     const { messages } = await req.json()
+//     const data = Usergetdata()
+//     return new Response(data);
+//   }
+
+ 
+// export async function GET(request: Request) {
+//   const cookieStore = await cookies()
+//   const token = cookieStore.get('token')
+ 
+//   return new Response('Hello, Next.js!', {
+//     status: 200,
+//     headers: { 'Set-Cookie': `token=${token.value}` },
+//   })
+// }

@@ -20,6 +20,9 @@ const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  password: z.string().min(6, {
+    message: "Username must be at least 2 characters.",
+  }),
 })
 
 export default function ProfileForm() {
@@ -28,6 +31,7 @@ export default function ProfileForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      password: "",
     },
   })
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -41,6 +45,22 @@ export default function ProfileForm() {
         <FormField
           control={form.control}
           name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="password"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Username</FormLabel>

@@ -17,7 +17,10 @@ import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
   Email: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
+    message: "email must be at least 2 characters.",
+  }),
+  password: z.string().min(6, {
+    message: "password must be at least 6 characters.",
   }),
 });
 
@@ -26,6 +29,7 @@ export const SignUpEmail = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       Email: "",
+      password: "",
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -50,19 +54,24 @@ export const SignUpEmail = () => {
                   Email
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" {...field} />
+                  <Input placeholder="Email" type="email" {...field} />
                 </FormControl>
-                
-                <FormLabel className="font-medium text-[14px] w-[359px] h-20px">
-                  Password
-                </FormLabel>
-                <FormControl>
-                  <Input placeholder="Password" {...field} />
-                </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />
+           <FormField
+          control={form.control}
+          name="password"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input placeholder="Password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
           <Button type="submit" className="w-[100%]">
             Continue
           </Button>
