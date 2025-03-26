@@ -11,7 +11,6 @@ export async function GET() {
 //     return new Response(data);
 //   }
 
- 
 // export async function GET(request: Request) {
 //   const cookieStore = await cookies()
 //   const token = cookieStore.get('token')
