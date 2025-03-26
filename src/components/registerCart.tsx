@@ -7,8 +7,9 @@ export const CartRegister = () => {
       <h3 className="text-2xl font-semibold">
         How would you like to be paid?{" "}
       </h3>
-      <p className="text-[#71717A] text-[14px]">Enter location and payment details</p>
-
+      <p className="text-[#71717A] text-[14px]">
+        Enter location and payment details
+      </p>
       <Label>Select country</Label>
       <Input type="select" placeholder="Select" className="h-10" />
 
