@@ -1,8 +1,16 @@
-export const UserProfile = () => {
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Input } from "./ui/input";
+
+export default function Profile() {
   return (
-    <div>
-        <p>Add photo</p>
-      <div className="w-20 h-20 bg-black rounded-full"></div>
+    <div className="space-y-2">
+        <Label>Name</Label>
+        <Input type="text" placeholder="Enter your name here" className="h-10"/>
+        <Label>About</Label>
+        <Input type="text" placeholder="Write about yourself here" className="h-[131px]"/>
+        <Label>Social media URL</Label>
+        <Input type="text" placeholder="https://" className="h-10"/>
     </div>
   );
-};
+}

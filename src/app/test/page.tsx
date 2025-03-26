@@ -1,9 +1,13 @@
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
-const page =()=>{
+export default function LabelDemo() {
   return (
     <div>
-      
+      <div className="">
+        <Label htmlFor="terms">Accept terms and conditions</Label>
+        <Input />
+      </div>
     </div>
-  )
+  );
 }
-export default page

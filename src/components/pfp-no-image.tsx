@@ -1,8 +1,8 @@
 export const UserProfileimage = () => {
     return (
-      <div>
-          <p>Add photo</p>
-        <div className="w-20 h-20 bg-black rounded-full"></div>
+      <div className="py-5">
+          <p className="font-medium text-[14px]">Add photo</p>
+        <div className="w-[160px] h-[160px] bg-black rounded-full"></div>
       </div>
     );
   };
