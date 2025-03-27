@@ -1,9 +1,16 @@
-import Image from "next/image";
+import { Sidebar } from "@/components/buy-me-coffee.sidebar";
+import { NormalHeader } from "@/components/header";
+import { UserpageBody } from "@/components/page-body";
+
 
 export default function Home() {
   return (
     <div>
-      <p>a</p>
+      <NormalHeader />
+      <div className="flex">
+        <Sidebar />
+        <UserpageBody />
+      </div>
     </div>
   );
 }
