@@ -1,6 +1,6 @@
-import { Sidebar } from "@/components/buy-me-coffee.sidebar";
+import { Sidebar } from "@/app/_components/buy-me-coffee.sidebar";
 import { NormalHeader } from "@/components/header";
-import { UserpageBody } from "@/components/page-body";
+import { UserpageBody } from "@/app/_components/page-body";
 
 
 export default function Home() {

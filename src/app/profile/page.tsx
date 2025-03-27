@@ -7,7 +7,7 @@ export default function Page() {
     <div className="w-[100vw] h-[100vh]">
       <NormalHeader />
       <RegisterProfile />
-      <CartRegister/>
+      <CartRegister />
     </div>
   );
 }
