@@ -27,7 +27,9 @@ export const DashboardProfile = () => {
             </div>
             <div>
               <h2 className="text-[16px] font-bold">Jake</h2>
-              <p className="text-gray-600 text-[14px]">buymeacoffee.com/baconpancakes1</p>
+              <p className="text-gray-600 text-[14px]">
+                buymeacoffee.com/baconpancakes1
+              </p>
             </div>
           </div>
           <Button
