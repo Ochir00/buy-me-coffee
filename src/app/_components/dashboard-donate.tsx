@@ -1,21 +1,23 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import { useState } from "react"
+import Image from "next/image";
+import { useState } from "react";
 
 interface Donation {
-  id: string
-  name: string
-  profileUrl: string
-  amount: string
-  message?: string
-  timeAgo: string
-  avatar?: string
-  initials?: string
+  id: string;
+  name: string;
+  profileUrl: string;
+  amount: string;
+  message?: string;
+  timeAgo: string;
+  avatar?: string;
+  initials?: string;
 }
 
 export function DonationFeed() {
-  const [expandedMessages, setExpandedMessages] = useState<Record<string, boolean>>({})
+  const [expandedMessages, setExpandedMessages] = useState<
+    Record<string, boolean>
+  >({});
 
   const donations: Donation[] = [
     {
@@ -71,17 +73,17 @@ export function DonationFeed() {
       timeAgo: "10 hours ago",
       initials: "CN",
     },
-  ]
+  ];
 
   const toggleMessage = (id: string) => {
     setExpandedMessages((prev) => ({
       ...prev,
       [id]: !prev[id],
-    }))
-  }
+    }));
+  };
 
   return (
-    <div className="w-[903px] border rounded-2xl p-4 bg-white">
+    <div className="w-[903px] border rounded-2xl p-4 bg-white mt-5">
       {donations.map((donation, index) => (
         <div key={donation.id} className="py-4">
           <div className="flex items-start gap-3">
@@ -107,13 +109,20 @@ export function DonationFeed() {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="font-medium text-base">{donation.name}</h3>
-                  <a href={`https://${donation.profileUrl}`} className="text-sm text-gray-500 hover:underline">
+                  <a
+                    href={`https://${donation.profileUrl}`}
+                    className="text-sm text-gray-500 hover:underline"
+                  >
                     {donation.profileUrl}
                   </a>
                 </div>
                 <div className="flex flex-col items-end">
-                  <span className="font-medium text-base">+ {donation.amount}</span>
-                  <span className="text-sm text-gray-500">{donation.timeAgo}</span>
+                  <span className="font-medium text-base">
+                    + {donation.amount}
+                  </span>
+                  <span className="text-sm text-gray-500">
+                    {donation.timeAgo}
+                  </span>
                 </div>
               </div>
 
@@ -121,7 +130,8 @@ export function DonationFeed() {
               {donation.message && (
                 <div className="mt-2">
                   <p className="text-base text-gray-800">
-                    {expandedMessages[donation.id] || donation.message.length <= 120
+                    {expandedMessages[donation.id] ||
+                    donation.message.length <= 120
                       ? donation.message
                       : `${donation.message.substring(0, 120)}...`}
                     {donation.message.length > 120 && (
@@ -129,7 +139,9 @@ export function DonationFeed() {
                         onClick={() => toggleMessage(donation.id)}
                         className="ml-1 font-medium text-gray-900 hover:underline"
                       >
-                        {expandedMessages[donation.id] ? "Show less" : "Show more"}
+                        {expandedMessages[donation.id]
+                          ? "Show less"
+                          : "Show more"}
                       </button>
                     )}
                   </p>
@@ -139,10 +151,11 @@ export function DonationFeed() {
           </div>
 
           {/* Separator (except for last item) */}
-          {index < donations.length - 1 && <div className="mt-4 border-b border-gray-100"></div>}
+          {index < donations.length - 1 && (
+            <div className="mt-4 border-b border-gray-100"></div>
+          )}
         </div>
       ))}
     </div>
-  )
+  );
 }
-

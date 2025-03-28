@@ -6,9 +6,9 @@ export default function Home() {
   return (
     <div>
       <NormalHeader />
-      <div className="flex ">
+      <div className="flex w-full ">
         <Sidebar />
-        <div className="ml-30 mt-30">
+        <div className="ml-30 mt-30 w-full">
           <UserpageBody />
         </div>
       </div>
