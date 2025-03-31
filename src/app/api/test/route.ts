@@ -2,7 +2,9 @@ import { Usergetdata } from "@/app/back-end/userdata";
 
 export async function GET() {
   const data = await Usergetdata();
-  return new Response("wiwiwi");
+  return new Response(JSON.stringify(data), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
 export async function POST(req: Request) {
   const { messages } = await req.json();
