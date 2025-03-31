@@ -8,14 +8,13 @@ export async function GET() {
 }
 export async function POST(req: Request) {
   const { messages } = await req.json();
-  const data = await Usergetdata();
+  const data = await Usergetdata().push(messages);
   return new Response(JSON.stringify({ messages, data }), {
     headers: { "Content-Type": "application/json" },
   });
 }
 export async function PUT(req: Request) {
   const { id, updateData } = await req.json();
-
   const updatedData = { id, ...updateData }; // Mock update logic
   return new Response(
     JSON.stringify({ message: "Data updated successfully", updatedData }),
