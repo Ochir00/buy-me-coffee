@@ -1,22 +1,33 @@
 import { Usergetdata } from "@/app/back-end/userdata";
-import { NextResponse } from "next/server";
-  import { cookies } from 'next/headers'
+
 export async function GET() {
-    const data = Usergetdata()
+  const data = await Usergetdata();
   return new Response("wiwiwi");
 }
-// export async function POST(req: Request) {
-//     const { messages } = await req.json()
-//     const data = Usergetdata()
-//     return new Response(data);
-//   }
+export async function POST(req: Request) {
+  const { messages } = await req.json();
+  const data = await Usergetdata();
+  return new Response(JSON.stringify({ messages, data }), {
+    headers: { "Content-Type": "application/json" },
+  });
+}
+export async function PUT(req: Request) {
+  const { id, updateData } = await req.json();
 
-// export async function GET(request: Request) {
-//   const cookieStore = await cookies()
-//   const token = cookieStore.get('token')
- 
-//   return new Response('Hello, Next.js!', {
-//     status: 200,
-//     headers: { 'Set-Cookie': `token=${token.value}` },
-//   })
-// }
+  const updatedData = { id, ...updateData }; // Mock update logic
+  return new Response(
+    JSON.stringify({ message: "Data updated successfully", updatedData }),
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+}
+export async function DELETE(req: Request) {
+  const { id } = await req.json();
+  return new Response(
+    JSON.stringify({ message: `Data with id ${id} deleted successfully` }),
+    {
+      headers: { "Content-Type": "application/json" },
+    }
+  );
+}
