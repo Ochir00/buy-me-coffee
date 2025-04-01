@@ -25,7 +25,7 @@ export function Header({ initialLoggedIn = false }: HeaderProps) {
           {isLoggedIn ? (
             <div className="flex items-center gap-2">
               <Image
-                src="/placeholder.svg?height=32&width=32"
+                src="/placeholder.svg"
                 alt="User profile"
                 width={32}
                 height={32}

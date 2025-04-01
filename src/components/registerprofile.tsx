@@ -1,4 +1,3 @@
-import { NormalHeader } from "@/components/header";
 import { UserProfileimage } from "@/components/pfp-no-image";
 import Profile from "@/components/profile";
 import { Button } from "@/components/ui/button";

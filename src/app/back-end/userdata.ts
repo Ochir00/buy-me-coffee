@@ -1,5 +1,4 @@
-export const Usergetdata = () => {
-  return [
+export const Usergetdata = [
     {
       id: "1",
       name: "Guest",
@@ -54,4 +53,4 @@ export const Usergetdata = () => {
       initials: "CN",
     },
   ];
-};
+

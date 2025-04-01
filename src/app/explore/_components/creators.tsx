@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
+import Image from "next/image";
 
 interface Creator {
   id: string;
@@ -86,9 +87,11 @@ export function CreatorExplorer() {
               <div className="flex flex-col md:flex-row gap-6">
                 <div className="flex items-start gap-4">
                   <Avatar className="h-16 w-16">
-                    <img
+                    <Image
                       src={creator.avatarUrl || "/placeholder.svg"}
                       alt={creator.name}
+                      width={80}
+                      height={80}
                     />
                   </Avatar>
                   <div>

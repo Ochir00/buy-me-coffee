@@ -33,7 +33,7 @@ const page = () => {
           className="w-[455px] h-[370px] "
         />
       </div>
-      {/* <SignUpUsername /> */}
+      <SignUpUsername />
       <SignUpEmail />
     </div>
   );

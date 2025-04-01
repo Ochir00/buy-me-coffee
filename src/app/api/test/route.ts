@@ -1,34 +1,47 @@
 import { Usergetdata } from "@/app/back-end/userdata";
 
 export async function GET() {
-  const data = await Usergetdata();
+  const data = await Usergetdata;
   return new Response(JSON.stringify(data), {
     headers: { "Content-Type": "application/json" },
   });
 }
 export async function POST(req: Request) {
-  const { messages } = await req.json();
-  const data = await Usergetdata().push(messages);
-  return new Response(JSON.stringify({ messages, data }), {
+  const NewUser = await req.json();
+  console.log(NewUser);
+  const data = await Usergetdata.push(NewUser);
+  return new Response(JSON.stringify({ NewUser, data }), {
     headers: { "Content-Type": "application/json" },
   });
 }
+
 export async function PUT(req: Request) {
-  const { id, updateData } = await req.json();
-  const updatedData = { id, ...updateData }; // Mock update logic
-  return new Response(
-    JSON.stringify({ message: "Data updated successfully", updatedData }),
-    {
+  const { id, name } = await req.json();
+  const user = await Usergetdata.find((user: any) => user.id === id); // Mock logic to find user
+  if (user) {
+    user.name = name;
+    return new Response(JSON.stringify(user), {
       headers: { "Content-Type": "application/json" },
-    }
-  );
+    });
+  } else {
+    return new Response(JSON.stringify({ message: "User not found" }), {
+      status: 404,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
 export async function DELETE(req: Request) {
   const { id } = await req.json();
-  return new Response(
-    JSON.stringify({ message: `Data with id ${id} deleted successfully` }),
-    {
+  const userIndex = Usergetdata.findIndex((user: any) => user.id === id); // Mock logic to find user index
+  if (userIndex !== -1) {
+    const deletedUser = Usergetdata.splice(userIndex, 1); // Remove user from the array
+    return new Response(JSON.stringify(deletedUser[0]), {
       headers: { "Content-Type": "application/json" },
-    }
-  );
+    });
+  } else {
+    return new Response(JSON.stringify({ message: "User not found" }), {
+      status: 404,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
 }
