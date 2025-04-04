@@ -49,7 +49,7 @@ import { runQuery } from "@/app/util/run-query";
 export async function GET(): Promise<NextResponse> {
   try {
     const incomingName = "boldo";
-    // const createTable = `CREATE TABLE "public"."Food" ("id" integer PRIMARY KEY,"name" varchar NOT NULL,"price" integer);`;
+
     const getUser = `SELECT name,password FROM "User" WHERE name='${incomingName}' AND password='1235';`;
 
     const user = await runQuery(getUser);
@@ -60,6 +60,24 @@ export async function GET(): Promise<NextResponse> {
     }
 
     return new NextResponse(JSON.stringify({ foods: user }));
+  } catch (err) {
+    console.error("Failed to run query:", err);
+    return new NextResponse(JSON.stringify({ error: "Failed to run query" }), {
+      status: 500,
+    });
+  }
+}
+export async function POST(req: Request): Promise<NextResponse> {
+  try {
+    const { email, password, username } = await req.json();
+    const createdAt = new Date().toISOString;
+    const updatedAt = new Date().toISOString;
+    const createUser = `INSERT INTO "User" (email, password, name, createdAt, updatedAt) VALUES ($1, $2, $3, $4, $5)`;
+    
+    const values = [
+      email, password, username, createdAt, updatedAt
+    ]
+    return NextResponse.status(201).json(createUser)
   } catch (err) {
     console.error("Failed to run query:", err);
     return new NextResponse(JSON.stringify({ error: "Failed to run query" }), {
