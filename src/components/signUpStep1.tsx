@@ -21,7 +21,8 @@ const formSchema = z.object({
   }),
 });
 
-export const SignUpUsername = () => {
+
+export const SignUpUsername = ({ handleClick }: { handleClick: () => void }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -31,6 +32,7 @@ export const SignUpUsername = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
+
   return (
       <div className="w-[1000px] bg-white flex items-center justify-center ">
         <Form {...form}>
@@ -54,7 +56,7 @@ export const SignUpUsername = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-[100%]">
+            <Button type="submit" className="w-[100%]" onClick={handleClick}>
               Continue
             </Button>
           </form>

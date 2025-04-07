@@ -24,7 +24,7 @@ const formSchema = z.object({
   }),
 });
 
-export const SignUpEmail = () => {
+export const SignUpEmail = ({ handleClick }: { handleClick: () => void }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -72,7 +72,7 @@ export const SignUpEmail = () => {
             </FormItem>
           )}
         />
-          <Button type="submit" className="w-[100%]">
+          <Button type="submit" className="w-[100%]" onClick={handleClick}>
             Continue
           </Button>
         </form>

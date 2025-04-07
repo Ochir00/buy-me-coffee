@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SignUpUsername } from "@/components/signUpStep1";
 import { SignUpEmail } from "@/components/signUpStep2t";
+import { useState } from "react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -13,6 +14,8 @@ const formSchema = z.object({
 });
 
 const page = () => {
+  const [Signstep, setSignstep] = useState(0);
+  const Formstate = [SignUpUsername, SignUpEmail][Signstep];
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -21,6 +24,11 @@ const page = () => {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+  }
+  function handleClick() {
+    console.log("aaa")
+    setSignstep(Signstep + 1);
+    
   }
   return (
     <div className="w-[100vw] h-[100vh] bg-white flex justify-between">
@@ -33,8 +41,7 @@ const page = () => {
           className="w-[455px] h-[370px] "
         />
       </div>
-      <SignUpUsername />
-      <SignUpEmail />
+      <Formstate handleClick={handleClick} />
     </div>
   );
 };
