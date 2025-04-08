@@ -25,10 +25,20 @@ const page = () => {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
   }
+  const [data, setdata] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+  function handlechange(event: any) {
+    const { name, value } = event.target;
+    setdata((prev) => ({ ...prev, [name]: value }));
+    console.log([name], value);
+    console.log(data);
+  }
   function handleClick() {
-    console.log("aaa")
+    const { username, email, password } = data;
     setSignstep(Signstep + 1);
-    
   }
   return (
     <div className="w-[100vw] h-[100vh] bg-white flex justify-between">
@@ -41,7 +51,11 @@ const page = () => {
           className="w-[455px] h-[370px] "
         />
       </div>
-      <Formstate handleClick={handleClick} />
+      <Formstate
+        handleClick={handleClick}
+        handlechange={handlechange}
+        data={data}
+      />
     </div>
   );
 };

@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  Email: z.string().min(2, {
+  email: z.string().min(2, {
     message: "email must be at least 2 characters.",
   }),
   password: z.string().min(6, {
@@ -24,16 +24,22 @@ const formSchema = z.object({
   }),
 });
 
-export const SignUpEmail = ({ handleClick }: { handleClick: () => void }) => {
+type Props = {
+  handleClick: () => void;
+  handlechange?: (event: any) => void;
+  data: object; 
+};
+export const SignUpEmail = ({ handleClick, handlechange, data}: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      Email: "",
+      email: "",
       password: "",
     },
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    handleClick();
   }
   return (
     <div className="w-[1000px] bg-white flex items-center justify-center ">
@@ -41,7 +47,7 @@ export const SignUpEmail = ({ handleClick }: { handleClick: () => void }) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
-            name="Email"
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="font-semibold text-[24px] w-[359px] h-20px">
@@ -54,25 +60,37 @@ export const SignUpEmail = ({ handleClick }: { handleClick: () => void }) => {
                   Email
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" type="email" {...field} />
+                  <Input
+                    placeholder="Email"
+                    type="email"
+                    {...field}
+                    name="email"
+                    onChange={handlechange}
+                  />
                 </FormControl>
               </FormItem>
             )}
           />
-           <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input placeholder="Password" type="password" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-          <Button type="submit" className="w-[100%]" onClick={handleClick}>
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    {...field}
+                    name="password"
+                    onChange={handlechange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="w-[100%]">
             Continue
           </Button>
         </form>
