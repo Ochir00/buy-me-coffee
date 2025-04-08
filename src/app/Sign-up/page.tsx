@@ -1,11 +1,10 @@
 "use client";
 import Image from "next/image";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { SignUpUsername } from "@/components/signUpStep1";
 import { SignUpEmail } from "@/components/signUpStep2t";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -14,31 +13,31 @@ const formSchema = z.object({
 });
 
 const page = () => {
+  const router = useRouter(); 
+
   const [Signstep, setSignstep] = useState(0);
   const Formstate = [SignUpUsername, SignUpEmail][Signstep];
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    },
-  });
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-  }
+
   const [data, setdata] = useState({
     username: "",
     email: "",
     password: "",
   });
-  function handlechange(event: any) {
-    const { name, value } = event.target;
-    setdata((prev) => ({ ...prev, [name]: value }));
-    console.log([name], value);
-    console.log(data);
-  }
-  function handleClick() {
-    const { username, email, password } = data;
-    setSignstep(Signstep + 1);
+  // function handlechange(event: any) {
+  //   const { name, value } = event.target;
+  //   setdata((prev) => ({ ...prev, [name]: value }));
+  //   console.log([name], value);
+  //   console.log(data);
+  // }
+  function handleClick(values: any) {
+    console.log("handleCickiin valuse", values);
+    setdata((prev) => ({ ...prev, ...values }));
+    if (Signstep === 0) {
+      setSignstep(1);
+    }
+    if (Signstep === 1) {
+      router.push("/"); // ✅ Redirect after last step
+    }
   }
   return (
     <div className="w-[100vw] h-[100vh] bg-white flex justify-between">
@@ -53,8 +52,8 @@ const page = () => {
       </div>
       <Formstate
         handleClick={handleClick}
-        handlechange={handlechange}
-        data={data}
+        // handlechange={handlechange}
+        // data={data}
       />
     </div>
   );

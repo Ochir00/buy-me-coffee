@@ -25,11 +25,9 @@ const formSchema = z.object({
 });
 
 type Props = {
-  handleClick: () => void;
-  handlechange?: (event: any) => void;
-  data: object; 
+  handleClick: (values: any) => void;
 };
-export const SignUpEmail = ({ handleClick, handlechange, data}: Props) => {
+export const SignUpEmail = ({ handleClick }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,7 +37,7 @@ export const SignUpEmail = ({ handleClick, handlechange, data}: Props) => {
   });
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    handleClick();
+    handleClick(values);
   }
   return (
     <div className="w-[1000px] bg-white flex items-center justify-center ">
@@ -64,8 +62,6 @@ export const SignUpEmail = ({ handleClick, handlechange, data}: Props) => {
                     placeholder="Email"
                     type="email"
                     {...field}
-                    name="email"
-                    onChange={handlechange}
                   />
                 </FormControl>
               </FormItem>
@@ -82,8 +78,6 @@ export const SignUpEmail = ({ handleClick, handlechange, data}: Props) => {
                     placeholder="Password"
                     type="password"
                     {...field}
-                    name="password"
-                    onChange={handlechange}
                   />
                 </FormControl>
                 <FormMessage />

@@ -14,7 +14,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -22,11 +21,9 @@ const formSchema = z.object({
   }),
 });
 type Props = {
-  handleClick: () => void;
-  handlechange?: (event: any) => void;
-  data: object; 
+  handleClick: (values: any) => void;
 };
-export const SignUpUsername = ({ handleClick, handlechange, data }: Props) => {
+export const SignUpUsername = ({ handleClick }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -34,10 +31,9 @@ export const SignUpUsername = ({ handleClick, handlechange, data }: Props) => {
     },
   });
 
-
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    handleClick();
+    console.log("values!!!", values);
+    handleClick(values);
   }
 
   return (
@@ -56,7 +52,7 @@ export const SignUpUsername = ({ handleClick, handlechange, data }: Props) => {
                   Choose a username for your page
                 </FormDescription>
                 <FormControl>
-                  <Input placeholder="Username" {...field} name="username" onChange={handlechange}/>
+                  <Input placeholder="Username" {...field} name="username" />
                 </FormControl>
 
                 <FormMessage />
