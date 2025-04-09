@@ -13,7 +13,7 @@ const formSchema = z.object({
 });
 
 const page = () => {
-  const router = useRouter(); 
+  const router = useRouter();
 
   const [Signstep, setSignstep] = useState(0);
   const Formstate = [SignUpUsername, SignUpEmail][Signstep];
@@ -23,12 +23,14 @@ const page = () => {
     email: "",
     password: "",
   });
-  // function handlechange(event: any) {
-  //   const { name, value } = event.target;
-  //   setdata((prev) => ({ ...prev, [name]: value }));
-  //   console.log([name], value);
-  //   console.log(data);
-  // }
+  async function postdata(data: object) {
+    const res = await fetch("/api/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({...data}),
+    });
+  }
+
   function handleClick(values: any) {
     console.log("handleCickiin valuse", values);
     setdata((prev) => ({ ...prev, ...values }));
@@ -36,7 +38,11 @@ const page = () => {
       setSignstep(1);
     }
     if (Signstep === 1) {
-      router.push("/"); // ✅ Redirect after last step
+      console.log(data);
+      if (data.email !== "" && data.password !== "" && data.username !== "") {
+        postdata(data);
+        router.push("/");
+      }
     }
   }
   return (
