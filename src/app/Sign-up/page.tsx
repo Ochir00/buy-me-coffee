@@ -27,8 +27,20 @@ const page = () => {
     const res = await fetch("/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({...data}),
+      body: JSON.stringify({ ...data }),
     });
+  
+    const result = await res.json(); // parse the JSON
+  
+    if (result.message === "success" && Array.isArray(result.data)) {
+      const userId = result.data[0]?.id;
+      console.log("User ID:", userId);
+      localStorage.setItem('userID', userId);
+      return userId;
+    } else {
+      console.error("Signup failed:", result);
+      return null;
+    }
   }
 
   function handleClick(values: any) {

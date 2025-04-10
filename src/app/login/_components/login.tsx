@@ -33,7 +33,7 @@ export function CoffeeLogin() {
   }
 
   return (
-    <div className="w-[50vw] max-w-md space-y-6">
+    <div className="w-[15vw]  space-y-6">
       <div className="flex justify-end">
         <Link href="/signup" className="text-sm font-medium text-gray-900 hover:underline">
           Sign up

@@ -5,7 +5,6 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: Request): Promise<NextResponse> {
   const { email, password, username } = await req.json();
-  console.log(email, password, username);
   const createdAt = new Date().toISOString();
   const updatedAt = new Date().toISOString();
   if (!email || !password || !username) {
@@ -16,14 +15,15 @@ export async function POST(req: Request): Promise<NextResponse> {
   const hashedPassword = await bcrypt.hash(password, 10);
   try {
     const result = await runQuery(
-      `INSERT INTO "User" (email, password, username ) 
-       VALUES ($1, $2, $3 ) RETURNING *;`,
-      [email, hashedPassword, username]
+      `INSERT INTO "User" (email, password, username, "createdAt", "updatedAt") 
+       VALUES ($1, $2, $3, $4, $5 ) RETURNING *;`,
+      [email, hashedPassword, username, createdAt, updatedAt]
     );
     return new NextResponse(
       JSON.stringify({ message: "success", data: result })
     );
   } catch (error) {
+    console.log("helpp---------------", createdAt, updatedAt);
     console.log("Database error:", error); // Log full error in the server
     return new NextResponse(JSON.stringify({ message: "error", data: null }));
   }

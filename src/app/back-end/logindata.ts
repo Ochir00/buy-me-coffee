@@ -1,17 +1,17 @@
-const logindata = [];
+export const userID =  localStorage.getItem('userID');
 
 
 
 
-// Save data
-localStorage.setItem('username', 'JohnDoe');
+// // Save data
+// localStorage.setItem('username', 'JohnDoe');
 
-// Get data
-const names = localStorage.getItem('username');
-console.log(name); // JohnDoe
+// // Get data
+// const names = localStorage.getItem('username');
+// console.log(name); // JohnDoe
 
-// Remove data
-localStorage.removeItem('username');
+// // Remove data
+// localStorage.removeItem('username');
 
-// Clear all local storage
-localStorage.clear();
+// // Clear all local storage
+// localStorage.clear();
